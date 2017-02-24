@@ -8,7 +8,13 @@
     <link rel="stylesheet" type="text/css" href="{{ mix('css/pyrite.css') }}">
     @stack('styles')
 </head>
-<body>
+<body class="
+{{ isset($dark) && $dark ? 'dark' : '' }}
+">
+
+@stack('root')
+
+@if(!$nosidebar)
     <div class="ui sidebar visible inverted vertical menu">
         <a class="item">
             <i class="home icon"></i>
@@ -28,11 +34,16 @@
             @yield('content')
         </div>
     </div>
-    <script>
-    window.Laravel = {!! json_encode([ 'csrfToken' => csrf_token(), ]) !!};
-    </script>
-    @stack('scripts')
-    <script src="{{ mix('js/app.js') }}"></script>
-    <script src="{{ mix('js/pyrite.js') }}"></script>
+@else
+    <div id="app">
+        @yield('content')
+    </div>
+@endif
+<script>
+window.Laravel = {!! json_encode([ 'csrfToken' => csrf_token(), ]) !!};
+</script>
+@stack('scripts')
+<script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ mix('js/pyrite.js') }}"></script>
 </body>
 </html>
