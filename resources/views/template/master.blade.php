@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,10 +12,9 @@
 <body class="
 {{ isset($dark) && $dark ? 'dark' : '' }}
 ">
-
 @stack('root')
 
-@if(!$nosidebar)
+@if(!(isset($nosidebar) && $nosidebar))
     <div class="ui sidebar visible inverted vertical menu">
         <a class="item">
             <i class="home icon"></i>
