@@ -14,10 +14,13 @@
 
 Auth::routes();
 
+
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', 'HomeController@index');
-    Route::get('/', function () {
-        return view('welcome');
+    Route::get('/',function(){
+        if(Auth::user()){
+            return redirect()->intended('dashboard');
+        }
+        return redirect()->intended('login');
     });
     Route::get('/logout', function () {
         Auth::logout();
